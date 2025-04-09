@@ -1,14 +1,34 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Reset : MonoBehaviour
 {
-    public float Threshold = -25f;
-    void Update()
+    public float threshold = -25f;
+    public Transform respawnPoint;
+
+    private void Update()
     {
-        if(transform.position.y < Threshold)
+        // Fall threshold check
+        if (transform.position.y < threshold)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            TeleportToRespawn();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Obstacle"))
+        {
+            TeleportToRespawn();
+        }
+    }
+
+    private void TeleportToRespawn()
+    {
+        transform.position = respawnPoint.position;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero; // Stop movement
         }
     }
 }

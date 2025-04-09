@@ -65,9 +65,11 @@ public class PlayerMovement : MonoBehaviour
 
     //Private int
 	private int nw;
-    
+
+    public bool allowCameraMovement = true;
+
     //Instance
-	public static PlayerMovement Instance { get; private set; }
+    public static PlayerMovement Instance { get; private set; }
 
 	private void Awake()
 	{
@@ -101,8 +103,11 @@ public class PlayerMovement : MonoBehaviour
         //Input
 		MyInput();
         //Looking around
-		Look();
-	}
+        if (allowCameraMovement)
+		{
+            Look();
+        }
+    }
 
     //Player input
 	private void MyInput()
