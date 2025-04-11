@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("GameOne", LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         Debug.Log("Uusi peli");
     }
 
